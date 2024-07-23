@@ -1,0 +1,16 @@
+{
+  "name": "crud-todo-list",
+  "version": "1.0.0",
+  "description": "This is a project to practice CRUD by building a simple to-do list, but focusing more on the core concepts and implementation of a CRUD.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./core/crud.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
