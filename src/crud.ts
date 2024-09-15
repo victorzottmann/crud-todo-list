@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs, { readFileSync } from "fs";
 const DB_FILE_PATH = "./src/db";
 
 function create(content: string) {
@@ -7,6 +7,12 @@ function create(content: string) {
   return content;
 }
 
+function read() {
+  const db = fs.readFileSync(DB_FILE_PATH, "utf-8");
+  return db;
+}
+
 // if you change the content and save (assuming nodemon is enabled), 
 // it'll automatically write it to the db file
-console.log(create("First fgfgd"));
+create("SEGUNDA TODO");
+console.log(read());
