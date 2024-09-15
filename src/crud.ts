@@ -1,5 +1,5 @@
 import fs from "fs";
-const DB_FILE_PATH = "./core/db";
+const DB_FILE_PATH = "./src/db";
 
 function create(content: string) {
   // save the content in the system
@@ -9,4 +9,4 @@ function create(content: string) {
 
 // if you change the content and save (assuming nodemon is enabled), 
 // it'll automatically write it to the db file
-console.log(create("this is a test"));
+console.log(create("First fgfgd"));
