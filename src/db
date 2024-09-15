@@ -1,1 +1,9 @@
-SEGUNDA TODO
+{
+  "todos": [
+    {
+      "date": "2024-09-15T08:35:22.538Z",
+      "content": "SECOND TODO",
+      "done": false
+    }
+  ]
+}

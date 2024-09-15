@@ -1,18 +1,47 @@
-import fs, { readFileSync } from "fs";
+import fs from "fs";
 const DB_FILE_PATH = "./src/db";
 
+interface Todo {
+  date: string;
+  content: string;
+  done: boolean;
+}
+
 function create(content: string) {
-  // save the content in the system
-  fs.writeFileSync(DB_FILE_PATH, content);
+  // Every todo must be of type Todo (interface)
+  const todo: Todo = {
+    date: new Date().toISOString(),
+    content,
+    done: false,
+  };
+
+  // The array of todos is an array of Todo objects
+  const todos = [
+    todo,
+  ];
+
+  // Save the content in the system
+  fs.writeFileSync(DB_FILE_PATH, JSON.stringify({
+    todos,
+  }, null, 2));
   return content;
 }
 
-function read() {
-  const db = fs.readFileSync(DB_FILE_PATH, "utf-8");
-  return db;
+// This function returns an array of todos
+function read(): Array<Todo> {
+  // Read string content from db in UTF-8 format not Buffer
+  const dbString = fs.readFileSync(DB_FILE_PATH, "utf-8");
+  // Parse the string into a JSON object if it exists, or assign db to an empty object
+  const db = JSON.parse(dbString || "{}");
+  // Fail Fast Validations
+  if (!db.todos) {
+    return [];
+  }
+  // If all is OK, return the todos
+  return db.todos;
 }
 
-// if you change the content and save (assuming nodemon is enabled), 
-// it'll automatically write it to the db file
-create("SEGUNDA TODO");
+// If you change the content and save (assuming nodemon is enabled), it'll automatically write it to the db file
+create("FIRST TODO");
+create("SECOND TODO");
 console.log(read());
