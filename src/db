@@ -1,20 +1,22 @@
 {
   "todos": [
     {
-      "date": "2024-09-15T09:33:01.360Z",
+      "id": "f90f2e61-6736-4579-bea8-1c811df2f186",
+      "date": "2024-09-15T09:37:26.438Z",
       "content": "FIRST TODO",
       "done": false
     },
     {
-      "date": "2024-09-15T09:33:01.360Z",
+      "id": "3a369515-05e4-4c9d-bcc1-fac18eafab50",
+      "date": "2024-09-15T09:37:26.438Z",
       "content": "SECOND TODO",
       "done": false
     },
     {
-      "date": "2024-09-15T09:33:01.360Z",
+      "id": "914662e7-196f-4be0-ba67-683dd6146d86",
+      "date": "2024-09-15T09:37:26.439Z",
       "content": "THIRD TODO",
       "done": false
     }
-  ],
-  "dogs": []
+  ]
 }

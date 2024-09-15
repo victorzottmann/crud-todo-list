@@ -1,7 +1,10 @@
 import fs from "fs";
+import { v4 as uuid } from "uuid";
+
 const DB_FILE_PATH = "./src/db";
 
 interface Todo {
+  id: string;
   date: string;
   content: string;
   done: boolean;
@@ -10,6 +13,7 @@ interface Todo {
 function create(content: string) {
   // Every todo must be of type Todo (interface)
   const todo: Todo = {
+    id: uuid(),
     date: new Date().toISOString(),
     content,
     done: false,
@@ -24,7 +28,6 @@ function create(content: string) {
   // Save the content in the system
   fs.writeFileSync(DB_FILE_PATH, JSON.stringify({
     todos,
-    dogs: [],
   }, null, 2));
   return content;
 }
