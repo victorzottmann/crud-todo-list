@@ -17,12 +17,14 @@ function create(content: string) {
 
   // The array of todos is an array of Todo objects
   const todos = [
+    ...read(), // Include all previous todos being read from the db
     todo,
   ];
 
   // Save the content in the system
   fs.writeFileSync(DB_FILE_PATH, JSON.stringify({
     todos,
+    dogs: [],
   }, null, 2));
   return content;
 }
@@ -41,7 +43,13 @@ function read(): Array<Todo> {
   return db.todos;
 }
 
+function clearDB() {
+  fs.writeFileSync(DB_FILE_PATH, "");
+}
+
 // If you change the content and save (assuming nodemon is enabled), it'll automatically write it to the db file
+clearDB();
 create("FIRST TODO");
 create("SECOND TODO");
+create("THIRD TODO");
 console.log(read());
