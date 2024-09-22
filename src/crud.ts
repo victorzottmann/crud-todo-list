@@ -10,7 +10,7 @@ interface Todo {
   done: boolean;
 }
 
-function create(content: string) {
+function create(content: string): Todo {
   // Every todo must be of type Todo (interface)
   const todo: Todo = {
     id: uuid(),
@@ -29,7 +29,8 @@ function create(content: string) {
   fs.writeFileSync(DB_FILE_PATH, JSON.stringify({
     todos,
   }, null, 2));
-  return content;
+
+  return todo;
 }
 
 // This function returns an array of todos
@@ -46,13 +47,43 @@ function read(): Array<Todo> {
   return db.todos;
 }
 
+function update(id: string, partialTodo: Partial<Todo>): Todo {
+  let updatedTodo;
+  const todos = read();
+
+  todos.forEach((currentTodo) => {
+    const isToUpdate = currentTodo.id === id;
+    if (isToUpdate) {
+      updatedTodo = Object.assign(currentTodo, partialTodo);
+    }
+  });
+
+  fs.writeFileSync(DB_FILE_PATH, JSON.stringify({
+    todos,
+  }, null, 2));
+
+  if (!updatedTodo) {
+    throw new Error("Please provide a valid ID");
+  }
+  return updatedTodo;
+}
+
+function updateContentById(id: string, content: string): Todo {
+  return update(id, {
+    content,
+  });
+}
+
 function clearDB() {
   fs.writeFileSync(DB_FILE_PATH, "");
 }
 
 // If you change the content and save (assuming nodemon is enabled), it'll automatically write it to the db file
 clearDB();
+
 create("FIRST TODO");
 create("SECOND TODO");
-create("THIRD TODO");
+const thirdTodo = create("THIRD TODO");
+
+updateContentById(thirdTodo.id, "Updated again!");
 console.log(read());
